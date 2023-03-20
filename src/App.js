@@ -1,7 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { useSafeAppsSDK } from '@gnosis.pm/safe-apps-react-sdk';
+import { useMemo } from 'react';
+import { SafeAppProvider } from '@gnosis.pm/safe-apps-provider';
+import Web3 from 'web3';
 
 function App() {
+  const { safe, sdk } = useSafeAppsSDK();
+  const web3Provider = useMemo(() => new Web3(new SafeAppProvider(safe, sdk)), [sdk, safe]);
+
+  console.debug("safe =", safe);
+  console.debug("sdk =", sdk);
+  console.debug("web3Provider =", web3Provider);
+
   return (
     <div className="App">
       <header className="App-header">
